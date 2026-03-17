@@ -14,10 +14,15 @@
         max-width: 800px;
         margin: 0 auto;
       }
-      input,
-      button {
+      input {
         padding: 8px;
         margin: 5px 0;
+      }
+
+      button {
+        padding: 8px;
+        margin: 20px auto;
+        display: block;
       }
       #pattern {
         margin-top: 20px;
@@ -43,17 +48,15 @@
 
     <script>
       function calculatePattern() {
-
         const stitches = parseInt(document.getElementById("stitches").value);
         const decreases = parseInt(document.getElementById("decreases").value);
         const patternDiv = document.getElementById("pattern");
         patternDiv.innerHTML = "";
 
         if (stitches < 2 || decreases < 1 || decreases >= stitches / 2) {
-          patternDiv.textContent = 
-          `Bitte gültige Werte eingeben:
-Start-Maschenanzahl muss größer als 1
-und Anzahl der Abnahmen kleiner als 
+          patternDiv.textContent = `Bitte gültige Werte eingeben:
+Die Start-Maschenanzahl muss größer als 1
+und die Anzahl der Abnahmen kleiner als 
 die Hälfte der Start-Maschenanzahl sein.
 
 Sonst sieht das nicht aus Kind!`;
@@ -65,11 +68,11 @@ Sonst sieht das nicht aus Kind!`;
         const j = decreases - i; // bsp 16-10 = 6
 
         if (stitches % decreases == 0) {
-          patternDiv.innerHTML += `Strick ${decreases} mal die ${q-1}. und die ${q}.
+          patternDiv.innerHTML += `Strick ${decreases} mal die ${q - 1}. und die ${q}.
 Masche zusammen!`;
         } else {
-          patternDiv.innerHTML += `Strick ${j} mal die ${q-1}. und die ${q}. 
-und ${i} mal die ${q}. und die ${q+1}. 
+          patternDiv.innerHTML += `Strick ${j} mal die ${q - 1}. und die ${q}. 
+und ${i} mal die ${q}. und die ${q + 1}. 
 Masche zusammen!`;
         }
       }
