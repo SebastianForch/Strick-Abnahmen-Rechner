@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strickmuster-Abnahmen-Rechner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        #pattern {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .knit {
+            background-color: #ffcccc;
+            padding: 2px 5px;
+        }
+        .decrease {
+            background-color: #ccffcc;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Strickmuster-Abnahmen-Rechner</h1>
+        <p>Gib die Start-Maschenanzahl und die Anzahl der Abnahmen ein:</p>
+        <label for="stitches">Start-Maschenanzahl:</label>
+        <input type="number" id="stitches" min="2" value="20"><br>
+        <label for="decreases">Anzahl der Abnahmen:</label>
+        <input type="number" id="decreases" min="1" value="5"><br>
+        <button onclick="calculatePattern()">Muster berechnen</button>
+        <div id="pattern"></div>
+    </div>
+
+    <script>
+        function calculatePattern() {
+            const stitches = parseInt(document.getElementById('stitches').value);
+            const decreases = parseInt(document.getElementById('decreases').value);
+            const patternDiv = document.getElementById('pattern');
+
+            if (stitches < 2 || decreases < 1 || decreases >= stitches) {
+                patternDiv.textContent = 
+		`Bitte gültige Werte eingeben: Start-Maschenanzahl muss größer als 1 
+und Anzahl der Abnahmen kleiner als die Start-Maschenanzahl sein.`;
+                return;
+            }
+
+            const interval = Math.floor(stitches / decreases);
+            let pattern = [];
+            let currentStitches = stitches;
+	let row = []; 
+
+		for (let j = 1; j < currentStitches; j++) {
+    		if ((j+1) % interval === 0 ) {
+ 		firstDecreaseJ = j;		
+		row.push(`<span class="decrease">${j} und ${j+1} zusammen </span>`);
+    		break;
+        	
+		} else {        	
+		row.push('<span class="knit">Strick</span>');		
+    			}
+		}
+
+	patternDiv.innerHTML = row.join(' ')+ "<br>"+"<br>";
+	
+	if (stitches % decreases !==0 && decreases < stitches/2) {
+	patternDiv.innerHTML += `Ab und zu sollte auch die ${firstDecreaseJ + 1}. und die ${firstDecreaseJ + 2}. Masche zusammengestrickt werden!`
+	}
+
+	if (stitches % decreases !==0 && decreases > stitches/2) {
+	patternDiv.innerHTML += `Ab und zu muss gleich mit der nächsten Masche zusammengestrickt werden!`
+	}
+
+   }                 
+
+</script>
+</body>
+</html>
