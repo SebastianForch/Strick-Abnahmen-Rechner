@@ -52,8 +52,10 @@
         if (stitches < 2 || decreases < 1 || decreases >= stitches / 2) {
           patternDiv.textContent = 
           `Bitte gültige Werte eingeben:
-Start-Maschenanzahl muss größer als 1 und Anzahl der Abnahmen
-kleiner als die Hälfte der Start-Maschenanzahl sein.
+Start-Maschenanzahl muss größer als 1
+und Anzahl der Abnahmen kleiner als 
+die Hälfte der Start-Maschenanzahl sein.
+
 Sonst sieht das nicht aus Kind!`;
           return;
         }
@@ -63,7 +65,8 @@ Sonst sieht das nicht aus Kind!`;
         const j = decreases - i; // bsp 16-10 = 6
 
         if (stitches % decreases == 0) {
-          patternDiv.innerHTML += `Strick ${decreases} mal die ${q-1}. und die ${q}. Masche zusammen!`;
+          patternDiv.innerHTML += `Strick ${decreases} mal die ${q-1}. und die ${q}.
+Masche zusammen!`;
         } else {
           patternDiv.innerHTML += `Strick ${j} mal die ${q-1}. und die ${q}. 
 und ${i} mal die ${q}. und die ${q+1}. 
